@@ -5,7 +5,7 @@
     <title>BuySellTrade</title>
 </head>
 <body>
-hello, quest
+<h1>BuySellTrade | <a href="/login">Войти</a> </h1><hr>
 <form action="/" method="get">
     Поиск : <input type="text" name="title" placeholder="Поиск по объявлениям"><br>
     <input type="submit" value="Поиск"/>

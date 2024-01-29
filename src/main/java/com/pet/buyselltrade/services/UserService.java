@@ -5,7 +5,6 @@ import com.pet.buyselltrade.models.UserModel;
 import com.pet.buyselltrade.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +15,22 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean createUser(UserModel userModel,String password) {
+    public boolean createUser(UserModel userModel) {
         String email = userModel.getEmail();
-        String encodedPassword = passwordEncoder.encode(password);
+        String encodedPassword = passwordEncoder.encode(userModel.getPassword());
         if (userRepository.findByEmail(email) != null) {
             return false;
         }
         userModel.setActive(true);
-        userModel.setPass(encodedPassword);
+        if (userModel.getPassword() != "") {
+            System.out.println(userModel.getPassword());
+            userModel.setPass(encodedPassword);
+            System.out.println(encodedPassword);
+
+        }
         userModel.getRoles().add(Role.ROLE_USER);
         log.info("Saving new User with email: {}", email);
+
         userRepository.save(userModel);
         return true;
     }

@@ -7,10 +7,10 @@
 <h1>BuySellTrade</h1><hr>
 <h4>Регистрация</h4>
 <form action="/registration" method="post">
-    Имя пользователя: <input type="text" name="name"><br><br>
+    Имя пользователя: <input type="text" name="userName"><br><br>
     Эл. почта: <input type="email" name="email"><br><br>
     Номер телефона: <input type="text" name="phone"><br><br>
-    Пароль: <input type="password" name="password"><br><br>
+    Пароль: <input type="password" name="pass"><br><br>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <input type="submit" value="Зарегистрироваться"/>
 </form>

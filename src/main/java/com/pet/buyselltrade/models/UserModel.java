@@ -7,9 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -23,8 +21,8 @@ public class UserModel implements UserDetails {
     private String email;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "name")
+    private String name;
     @Column(name = "active")
     private boolean active;
     @OneToOne(cascade =  CascadeType.ALL,fetch = FetchType.EAGER)
@@ -36,6 +34,8 @@ public class UserModel implements UserDetails {
     @CollectionTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER , mappedBy = "user")
+    private List<ProductModel> products = new ArrayList<>();
     private LocalDateTime dateOfCreated;
 
     @PrePersist

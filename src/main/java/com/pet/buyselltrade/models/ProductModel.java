@@ -28,12 +28,13 @@ public class ProductModel {
     private String city;
     @Column(name = "price")
     private int price;
-    @Column(name = "author")
-    private String author;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "productModel")
 
     private List<ImageModel> imageModels = new ArrayList<>();
     private Long previewImageId;
+    @ManyToOne(cascade = CascadeType.REFRESH,fetch = FetchType.LAZY)
+    @JoinColumn
+    private UserModel user;
     private LocalDateTime dateOfCreated;
 
     @PrePersist

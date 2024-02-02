@@ -8,6 +8,7 @@ import com.pet.buyselltrade.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -68,7 +69,7 @@ public class ProductService {
         return imageModel;
     }
 
-    public void deleteProduct(Long id) {
+    public void deleteProduct(@PathVariable("id") Long id) {
         productrepository.deleteById(id);
     }
 

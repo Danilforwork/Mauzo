@@ -15,10 +15,8 @@
         <hr>${product.title} ${product.city} ${product.price} руб.</p> | <a href="/product/${product.id}">Подробнее</a>
     </div>
     <#else>
-        <h3>Товар нет</h3>
+        <h3>Товаров нет</h3>
 </#list>
-<#if errorMessage??>
-    <h2 style="color: red">${errorMessage}</h2>
-</#if>
+
 </body>
 </html>

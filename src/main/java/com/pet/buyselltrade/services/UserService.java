@@ -8,7 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -30,7 +34,7 @@ public class UserService {
             System.out.println(encodedPassword);
 
         }
-        userModel.getRoles().add(Role.ROLE_ADMIN);
+        userModel.getRoles().add(Role.ROLE_USER);
         log.info("Saving new User with email: {}", email);
 
         userRepository.save(userModel);
@@ -50,10 +54,22 @@ public class UserService {
             }
             else {
                 userModel.setActive(true);
-                log.info("Ban user with id {} ; email : {}", userModel.getId(), userModel.getEmail());
+                log.info("UnBan user with id {} ; email : {}", userModel.getId(), userModel.getEmail());
             }
         }
         userRepository.save(userModel);
     }
 
+    public void changeUserRoles(UserModel user, Map<String, String> form) {
+        Set<String> roles = Arrays.stream(Role.values())
+                .map(Role::name)
+                .collect(Collectors.toSet());
+        user.getRoles().clear();
+        for (String key : form.keySet()) {
+            if (roles.contains(key)) {
+                user.getRoles().add(Role.valueOf(key));
+            }
+        }
+        userRepository.save(user);
+    }
 }

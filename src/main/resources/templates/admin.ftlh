@@ -29,7 +29,7 @@
             <td><#list user.roles as role>${role}</#list></td>
             <td>
                 <form action="/admin/user/ban/${user.id}" method="post">
-                    <input type="hidden" name="_crsf" value="_crsf.token">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                     <input type="submit" value="Бан">
                 </form>
             </td>

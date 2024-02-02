@@ -2,10 +2,12 @@ package com.pet.buyselltrade.controllers;
 
 import com.pet.buyselltrade.models.UserModel;
 import com.pet.buyselltrade.services.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -39,8 +41,16 @@ public class UserController {
         return "redirect:/login";
     }
 
+    @GetMapping("user/{user}")
+    public String userInfo(@PathVariable("user") UserModel userModel, Model model) {
+        model.addAttribute("user",userModel);
+        model.addAttribute("products", userModel.getProducts());
+        return "user_info";
+    }
+
     @GetMapping("/hello")
-    public String hello() {
+    public String hello(HttpServletResponse response) {
+        response.setHeader("Refresh", "1; /");
         return "hello";
     }
 }

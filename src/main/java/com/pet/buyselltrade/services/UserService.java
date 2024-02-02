@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -28,11 +30,30 @@ public class UserService {
             System.out.println(encodedPassword);
 
         }
-        userModel.getRoles().add(Role.ROLE_USER);
+        userModel.getRoles().add(Role.ROLE_ADMIN);
         log.info("Saving new User with email: {}", email);
 
         userRepository.save(userModel);
         return true;
+    }
+
+    public List<UserModel> list(){
+        return userRepository.findAll();
+    }
+
+    public  void banUser(Long id){
+        UserModel userModel= userRepository.findById(id).orElse(null);
+        if (userModel != null){
+            if (userModel.isActive()) {
+                userModel.setActive(false);
+                log.info("Ban user with id = {}; email: {}", userModel.getId(), userModel.getEmail());
+            }
+            else {
+                userModel.setActive(true);
+                log.info("Ban user with id {} ; email : {}", userModel.getId(), userModel.getEmail());
+            }
+        }
+        userRepository.save(userModel);
     }
 
 }

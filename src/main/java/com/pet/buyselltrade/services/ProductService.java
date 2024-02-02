@@ -45,7 +45,7 @@ public class ProductService {
             imageModel3 = toImageEntity(file3);
             productModel.addImageToProduct(imageModel3);
         }
-        log.info("Saving new product. Title: {};Author email: {}", productModel.getTitle(), productModel.getUser().getEmail());
+        log.info("Saving new product. Title: {};User email: {}", productModel.getTitle(), productModel.getUser().getEmail());
         ProductModel productFromdb = productrepository.save(productModel);
         productFromdb.setPreviewImageId(productFromdb.getImageModels().get(0).getId());
         productrepository.save(productModel);

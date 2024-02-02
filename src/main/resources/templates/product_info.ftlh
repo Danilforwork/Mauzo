@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>BuySellTrade</title>
@@ -14,7 +14,7 @@
 <b>Описание:</b>${product.description}<br><br>
 <b> Местоположение:</b>${product.city}<br><br>
 <b>Цена товара:</b>${product.price}<br><br>
-<b>Продавец:</b>${product.user.name}<br><br>
+<b>Продавец:</b><a href="/user/${product.user.id}"> ${product.user.name}</a><br><br>
 <hr>
 
 </body>

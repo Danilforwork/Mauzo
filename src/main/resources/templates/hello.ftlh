@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello Page</title>
+    <title>logged</title>
 </head>
 <body>
-<h1>Hello!</h1>
+<h1>You are logged in</h1>
 </body>
 </html>

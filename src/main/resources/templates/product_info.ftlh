@@ -16,8 +16,8 @@
 <b>Цена товара:</b>${product.price}<br><br>
 <b>Продавец:</b><a href="/user/${product.user.id}"> ${product.user.name}</a><br><br>
 <hr>
-<form action="/product/${product.id}" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить товар?')">
-    <input type="hidden" name="_crsf" value="_crsf.token">
+<form action="/product/${product.id}/delete" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить товар?')">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
     <button type="submit" value="Удалить товар">Удалить товар</button>
 </form>
 </body>
